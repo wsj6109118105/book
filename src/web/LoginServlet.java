@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
             System.out.println("登录成功");
         }else{
             System.out.println("登录失败");
-            req.getRequestDispatcher("login.html").forward(req,resp);
+            req.getRequestDispatcher("login.jsp").forward(req,resp);
         }
     }
 }

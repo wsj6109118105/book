@@ -27,10 +27,10 @@ public class RegisteredServlet extends HttpServlet {
         String email = req.getParameter("email");
         if(userService.existUsername(username)){
             System.out.println("用户名已存在");
-            req.getRequestDispatcher("registered.html").forward(req,resp);
+            req.getRequestDispatcher("registered.jsp").forward(req,resp);
         }else{
             userService.RegisteredUser(new User(null,username,password,email));
-            req.getRequestDispatcher("login.html").forward(req,resp);
+            req.getRequestDispatcher("login.jsp").forward(req,resp);
         }
     }
 }
