@@ -52,7 +52,7 @@
 <body>
 <div>
     <span id="spn" style="color: red">
-        <%=request.getAttribute("message1")==null?"注册书城":request.getAttribute("message1")%>
+        ${ empty requestScope.message1 ? "注册书城账号" : requestScope.message1 }
     </span>
 </div>
 <div>
@@ -61,7 +61,7 @@
         <label>用户名称：</label>
         <input type="text" name="username" id="01"
                placeholder="请输入用户名" tabindex="1"
-                value="<%=request.getAttribute("username1")==null?"":request.getAttribute("username1")%>"><br>
+                value="${requestScope.username1}"><br>
         <label>密码：</label>
         <input type="password" name="password" id="02"
                placeholder="请输入密码" tabindex="1"><br>
@@ -71,7 +71,7 @@
         <label>电子邮箱：</label>
         <input type="text" name="email" id="04"
                placeholder="请输入邮箱" tabindex="1"
-               value="<%=request.getAttribute("email")==null?"":request.getAttribute("email")%>"><br>
+               value="${requestScope.email}"><br>
         <input type="submit" name="btn" id="05" value="注册">
     </form>
 </div>

@@ -1,14 +1,18 @@
 package web;
 
+import org.apache.commons.beanutils.BeanUtils;
 import service.Impl.UserServiceImpl;
 import service.UserService;
 import user.User;
+import utils.WebUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * @className: UserServlet
@@ -17,7 +21,7 @@ import java.io.IOException;
  * @date: 2021/4/30 21:06
  * @version: 1.0
  **/
-public class UserServlet extends HttpServlet {
+public class UserServlet extends BaseServlet {
     /**
      * @description:  处理登录的功能
      * @param: [javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse]
@@ -25,9 +29,12 @@ public class UserServlet extends HttpServlet {
      * @author 23624
      * @date: 2021/4/30 21:15
      */
-    protected void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserServiceImpl();
-        if(userService.login(new User(null,req.getParameter("username"),req.getParameter("password"),null))!=null){
+        //使用BeanUtils注入user对象
+        User user = WebUtils.copyParameterBean(req.getParameterMap(),new User());
+        System.out.println(user);
+        if(userService.login(user)!=null){
             System.out.println("登录成功");
         }else{
             System.out.println("登录失败");
@@ -43,29 +50,18 @@ public class UserServlet extends HttpServlet {
      * @author 23624
      * @date: 2021/4/30 21:15
      */
-    protected void registered(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void registered(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserServiceImpl();
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        String email = req.getParameter("email");
-        if(userService.existUsername(username)){
+        User user = WebUtils.copyParameterBean(req.getParameterMap(),new User());
+        if(userService.existUsername(user.getUsername())){
             System.out.println("用户名已存在");
             req.setAttribute("message1","用户名已存在");
-            req.setAttribute("username1",username);
-            req.setAttribute("email",email);
+            req.setAttribute("username1",user.getUsername());
+            req.setAttribute("email",user.getEmail());
             req.getRequestDispatcher("registered.jsp").forward(req,resp);
         }else{
-            userService.RegisteredUser(new User(null,username,password,email));
+            userService.RegisteredUser(user);
             req.getRequestDispatcher("login.jsp").forward(req,resp);
-        }
-    }
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        if("login".equals(action)){
-            login(req,resp);
-        }else if("registered".equals(action)){
-            registered(req,resp);
         }
     }
 }

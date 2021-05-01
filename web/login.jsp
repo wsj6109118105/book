@@ -36,13 +36,14 @@
 <body>
 <div>
     <span id="spn" style="color: red">
-        <%=request.getAttribute("message")==null?"请输入用户名和密码":request.getAttribute("message")%>
+<%--        <%=request.getAttribute("message")==null?"请输入用户名和密码":request.getAttribute("message")%>--%>
+        ${ empty requestScope.message ? "请输入用户名和密码" :requestScope.message }
     </span>
 </div>
 <form action="UserServlet" method="post">
     <input type="hidden" name="action" value="login">
     用户名：<input type="text" name="username" id="01"
-               value="<%=request.getAttribute("username")==null?"":request.getAttribute("username")%>"><br>
+               value="${requestScope.username}"><br>
     密码：<input type="password" name="password" id="02"><br>
     <button type="submit" id="btn">登录</button>
 </form>

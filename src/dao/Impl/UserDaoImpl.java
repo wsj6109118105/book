@@ -34,7 +34,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
      */
     public int saveUser(User user) {
         String sql = "insert into buser values(?,?,?,?)";
-        return updata(sql,null,user.getUsername(),user.getPasword(),user.getEmail());
+        return updata(sql,null,user.getUsername(),user.getPassword(),user.getEmail());
     }
 
     @Override

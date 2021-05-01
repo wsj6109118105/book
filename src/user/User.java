@@ -10,16 +10,16 @@ package user;
 public class User {
     private Integer id;
     private String username;
-    private String pasword;
+    private String password;
     private String email;
 
     public User() {
     }
 
-    public User(Integer id, String username, String pasword, String email) {
+    public User(Integer id, String username, String password, String email) {
         this.id = id;
         this.username = username;
-        this.pasword = pasword;
+        this.password = password;
         this.email = email;
     }
 
@@ -39,12 +39,12 @@ public class User {
         this.username = username;
     }
 
-    public String getPasword() {
-        return pasword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasword(String pasword) {
-        this.pasword = pasword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -60,7 +60,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", password='" + pasword + '\'' +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
