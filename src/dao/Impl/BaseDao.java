@@ -20,13 +20,13 @@ public abstract class BaseDao {
     //使用dbutils操作数据库
     private QueryRunner queryRunner = new QueryRunner();
     /**
-     * @description:  用来执行insert/updata/delate语句
+     * @description:  用来执行insert/update/delete语句
      * @param:
      * @return: [返回-1表示执行失败，返回其他表示影响的行数]
      * @author 23624
      * @date: 2021/4/19 21:36
      */
-    public int updata(String sql,Object ... args){
+    public int update(String sql,Object ... args){
         Connection con = JdbcUtils.getConnection();
         try {
             return queryRunner.update(con,sql,args);

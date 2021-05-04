@@ -28,7 +28,7 @@
                     return false;
                 }
                 $("#spn").text("");
-            })
+            });
         })
     </script>
     <title>Title</title>
@@ -42,10 +42,11 @@
 </div>
 <form action="UserServlet" method="post">
     <input type="hidden" name="action" value="login">
-    用户名：<input type="text" name="username" id="01"
+    用户名：<input type="text" name="username" id="01" tabindex="1"
                value="${requestScope.username}"><br>
-    密码：<input type="password" name="password" id="02"><br>
+    密码：<input type="password" name="password" id="02" tabindex="1"><br>
     <button type="submit" id="btn">登录</button>
 </form>
+<a href="manager/BookServlet?action=list">图书管理</a>
 </body>
 </html>
